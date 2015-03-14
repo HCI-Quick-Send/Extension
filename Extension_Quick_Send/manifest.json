@@ -10,9 +10,13 @@
     "default_popup": "popup.html",
 	"default_title": "QuickSend"
   },
+  "background": {
+    "scripts": ["background.js"]
+  },
   "permissions": [
     "activeTab",
 	"gcm",
+	"storage",
     "https://ajax.googleapis.com/"
   ]
 }
