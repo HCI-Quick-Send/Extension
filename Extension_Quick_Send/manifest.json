@@ -17,6 +17,7 @@
     "activeTab",
 	"gcm",
 	"storage",
+	"notifications",
     "https://ajax.googleapis.com/"
   ]
 }

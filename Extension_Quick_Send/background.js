@@ -51,13 +51,18 @@ chrome.gcm.unregister(unregisterCallback);
 chrome.gcm.onMessage.addListener(function(message) {
   // A message is an object with a data property that
   // consists of key-value pairs.
-  console.log(message);
+  console.log('Message!!!!!!!!!!!');
+  var messageString = "";
+  for (var key in message.data) {
+    if (messageString != "")
+      messageString += ", "
+    messageString += key + ":" + message.data[key];
+  }
+  console.log("Message received: " + messageString);
 });
 
-chrome.runtime.onStartup.addListener(function(){
-	checkRegistered();
-});
-
+chrome.runtime.onStartup.addListener(checkRegistered);
+chrome.runtime.onInstalled.addListener(checkRegistered);
 // Substitute your own sender ID here. This is the project
 // number you got from the Google Developers Console.
 var senderId = "1083702790790";
@@ -96,17 +101,7 @@ function sendMessage() {
       "key2": "value2"
     }
   };
-  chrome.gcm.send(message, function(messageId) {
-    if (chrome.runtime.lastError) {
-      // Some error occurred. Fail gracefully or try to send
-      // again.
-      return;
-    }
-
-    // The message has been accepted for delivery. If the message
-    // can not reach the destination, onSendError event will be
-    // fired.
-  });
+  
 }
 
 function sendError(error) {
@@ -121,7 +116,6 @@ function messagesDeleted() {
   // your application server to recover from the situation.
 }
 
-checkRegistered();
 console.log(chrome.storage.local.get('registered', function(result){
         console.log(result.registered);
     }));
