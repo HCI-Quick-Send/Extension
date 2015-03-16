@@ -1,0 +1,30 @@
+/* colors */
+
+$pink: #F43752;
+$dark-gray: #2A2F3E;
+$light-gray: #A7A0A2;
+$white: #FFF;
+
+$font-lg : 20px;
+$font-md : 16px;
+$font-sm : 12px;
+
+body {
+	margin: 0;
+}
+
+.content {
+	padding: 10px;
+}
+
+.header {
+	padding: 10px 20px;
+	background-color: $pink;
+	font-size: $font-lg;
+	color: $white;
+}
+
+.search{
+	font-size: $font-md;
+	color: $dark-gray;
+}

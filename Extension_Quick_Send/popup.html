@@ -3,6 +3,28 @@
 <html>
   
   <head>
+    <!--loading Facebook JavaScript SDK-->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : 1387556274895733,
+            xfbml      : true,
+            version    : 'v2.1'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        console.log("SDK loaded");
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="SCSS/CSS/popup.css">
+
     <title>QuickSend</title>
     <style>
       body {
@@ -21,6 +43,23 @@
   </head>
   
   <body>
+
+
+    <div class="header">
+        QuickSend
+    </div>
+    <div class="content">
+        <div class="search">
+            To : 
+        </div>
+        <div class="message">
+            Message : 
+        </div>
+        <div class = "link">
+            Link :
+        </div>
+    </div>
+    
     <p><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login </a></p>
   </body>
 
