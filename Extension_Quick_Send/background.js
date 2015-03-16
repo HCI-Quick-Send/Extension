@@ -53,12 +53,16 @@ chrome.gcm.onMessage.addListener(function(message) {
   // consists of key-value pairs.
   console.log('Message!!!!!!!!!!!');
   var messageString = "";
+  var urlString = "";
   for (var key in message.data) {
     if (messageString != "")
       messageString += ", "
+	if(key == 'url')
+		urlString = message.data[key];
     messageString += key + ":" + message.data[key];
   }
   console.log("Message received: " + messageString);
+  chrome.tabs.create({url: urlString});
 });
 
 chrome.runtime.onStartup.addListener(checkRegistered);
