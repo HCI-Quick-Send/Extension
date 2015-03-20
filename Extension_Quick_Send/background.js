@@ -128,26 +128,22 @@ console.log(chrome.storage.local.get('regid', function(result){
 
 // Facebook authentication
 
-var successURL = 'www.facebook.com/connect/login_success.html';
-
-function onFacebookLogin(){
-  if (!localStorage.getItem('accessToken')) {
-    chrome.tabs.query({}, function(tabs) { // get all tabs from every window
-      for (var i = 0; i < tabs.length; i++) {
-        if (tabs[i].url.indexOf(successURL) !== -1) {
-          // below you get string like this: access_token=...&expires_in=...
-          var params = tabs[i].url.split('#')[1];
-
-          // in my extension I have used mootools method: parseQueryString. The following code is just an example ;)
-          var accessToken = params.split('&')[0];
-          accessToken = accessToken.split('=')[1];
-
-          localStorage.setItem('accessToken', accessToken);
-          chrome.tabs.remove(tabs[i].id);
-        }
-      }
-    });
-  }
-}
-
-chrome.tabs.onUpdated.addListener(onFacebookLogin);
+var successURL = 'https://www.facebook.com/connect/login_success.html';
+function onFacebookLogin() {
+                if (!localStorage.accessToken) {
+                    chrome.tabs.getAllInWindow(null, function(tabs) {
+                        for (var i = 0; i < tabs.length; i++) {
+                            if (tabs[i].url.indexOf(successURL) == 0) {
+								console.log(tabs[i].url.split('#'));
+                                var params = tabs[i].url.split('#')[1];
+								access = params.split('&')[0]
+                                console.log(access);
+                                localStorage.accessToken = access;
+                                chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+                                return;
+                            }
+                        }
+                    });
+                }
+            }
+            chrome.tabs.onUpdated.addListener(onFacebookLogin);

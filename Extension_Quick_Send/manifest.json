@@ -9,8 +9,8 @@
     "default_popup": "popup.html",
 	"default_title": "QuickSend"
   },
-  "background": {
-    "scripts": ["background.js"]
+  "background": 
+  {"page":"background.html"
   },
   "permissions": [
     "activeTab",
