@@ -18,6 +18,7 @@
 	"storage",
 	"notifications",
 	"tabs",
+	 "http://*.facebook.com/*",
     "https://ajax.googleapis.com/"
   ]
 }

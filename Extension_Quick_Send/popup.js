@@ -8,6 +8,7 @@
  * @param {function(string)} callback - called when the URL of the current tab
  *   is found.
  **/
+ 
 function getCurrentTabUrl(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
@@ -93,6 +94,19 @@ function renderStatus(statusText) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+ if (localStorage.accessToken) {
+		var graphUrl = "https://graph.facebook.com/me?" + localStorage.accessToken + "&callback=displayUser";
+		console.log(graphUrl);
+
+		var script = document.createElement("script");
+		script.src = graphUrl;
+		document.body.appendChild(script);
+
+		function displayUser(user) {
+			console.log(user);
+		}
+	}
+		
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);
@@ -116,3 +130,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+function httpGet(theUrl)
+{
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
