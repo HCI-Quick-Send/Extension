@@ -119,12 +119,12 @@ function messagesDeleted() {
   // your application server to recover from the situation.
 }
 
-console.log(chrome.storage.local.get('registered', function(result){
+chrome.storage.local.get('registered', function(result){
         console.log(result.registered);
-    }));
-console.log(chrome.storage.local.get('regid', function(result){
+    });
+chrome.storage.local.get('regid', function(result){
 		console.log("RegID: " + result.regid);
-    }));
+    });
 
 // Facebook authentication
 
@@ -140,6 +140,9 @@ function onFacebookLogin() {
                                 console.log(access);
                                 localStorage.accessToken = access;
                                 chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+								chrome.storage.local.get('regid', function(result){
+									console.log("RegID: " + result.regid);
+								});
                                 return;
                             }
                         }
