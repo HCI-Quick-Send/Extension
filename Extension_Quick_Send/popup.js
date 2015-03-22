@@ -14,11 +14,18 @@ if (localStorage.accessToken) {
 				}
 			});
 
-	var graphUrl = "https://graph.facebook.com/me/taggable_friends?" + localStorage.accessToken;
+	var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
 	console.log(graphUrl);
-	var  json = httpGet(graphUrl);
-	var obj = JSON.parse(json);
-	//console.log(json);
+	var friends_request = $.ajax({
+	  url: friendsUrl,
+	  type: "GET",
+	  error: function() {
+		  console.log("Request failed!");
+		},
+	  success:function(msg) {
+			console.log(msg);
+		}
+	});
 }
 function registerDB(fbid)
 {
@@ -37,14 +44,5 @@ function registerDB(fbid)
 			}
 		});
 	});
-}
-function httpGet(theUrl)
-{
-    var xmlHttp = null;
-
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false );
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
 }
 
