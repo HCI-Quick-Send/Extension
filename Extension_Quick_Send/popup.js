@@ -15,7 +15,7 @@ if (localStorage.accessToken) {
 			});
 
 	var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
-	console.log(graphUrl);
+	console.log(friendsUrl);
 	var friends_request = $.ajax({
 	  url: friendsUrl,
 	  type: "GET",
