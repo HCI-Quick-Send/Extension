@@ -114,6 +114,8 @@ chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 	//store URL in local storage for getSelectValues to use
 	localStorage.currentPage = tabUrl;
 
+	$("#link").html(tabUrl);
+
 	var istr = "http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link=" + tabUrl + "&redirect_uri=https://www.google.com/?gws_rd=ssl&display=iframe";
 
 	$("#myButton").click(function(event){            
