@@ -17,22 +17,21 @@ if (localStorage.accessToken) {
 	var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
 	console.log(friendsUrl);
 	var friends_request = $.ajax({
-	  url: friendsUrl,
-	  type: "GET",
-	  error: function() {
-		  console.log("Request failed!");
+	 	url: friendsUrl,
+	 	type: "GET",
+	 	error: function() {
+		 	console.log("Request failed!");
 		},
-	  success:function(msg) {
+	  	success:function(msg) {
 			console.log(msg);
-			console.log("msg.data");
-				console.log(msg.data);
-				var options = "";
-				for (var i = 0; i < msg.data.length; i++) {
-					console.log(msg.data[i]);
-					options += '<option value="' + msg.data[i].id + '">' + msg.data[i].name + '</option>';
-				}
-				console.log(options);
-				$("#friendsList").html(options);
+			//load friends' options to #friendsList from json
+			var options = "";
+			for (var i = 0; i < msg.data.length; i++) {
+				options += '<option value="' + msg.data[i].id + '">' + msg.data[i].name + '</option>';
+			}
+
+			console.log(options);
+			$("#friendsList").html(options); //add options to select in HTML
 		}
 	});
 }
@@ -102,30 +101,23 @@ $(document).ready(function(){
 });
 
 
-// code below gets the current tab's URL and inserts it into the HTML
+// code below gets the current tab's URL and creates an iframe with it
 //currently redirecting to an image. Have to change
+
 var accToken = localStorage.accessToken;
-
-//var str1 = "<a href=\"http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link="	//first half of the final message string
-//var str2 = "&redirect_uri=http://www.freeemailtutorials.com/freeFacebookTutorials/i/Email%20sent%20confirmation%20message%20in%20your%20Facebook%20account.jpg&display=popup\" target=\"_blank\"> Message </a>"	//second half of the final message string
-
 var tabUrl; //url of the current tab
 var msgStr; //construct the message string for the redirect URL
-
-
 
 chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 	//get URL of current tab
 	tabUrl = tabs[0].url;
-	
+	//store URL in local storage for getSelectValues to use
 	localStorage.currentPage = tabUrl;
-	//construct final string
-	//msgStr = str1 + tabUrl + str2;
 
 	var istr = "http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link=" + tabUrl + "&redirect_uri=https://www.google.com/?gws_rd=ssl&display=iframe";
 
 	$("#myButton").click(function(event){            
-	$("#myIFrame").attr('src', istr);
+		$("#myIFrame").attr('src', istr);
 	});
 });
 
