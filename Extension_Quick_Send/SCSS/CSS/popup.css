@@ -1,6 +1,9 @@
 /* colors */
 body {
-  margin: 0; }
+  margin: 0;
+  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+  font-size: 100%;
+  width: 500px; }
 
 .content {
   padding: 10px; }
