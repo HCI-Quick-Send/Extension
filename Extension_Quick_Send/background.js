@@ -72,7 +72,10 @@ chrome.gcm.onMessage.addListener(function(message) {
     title: 'QuickSend Link from: ' + sender,
     iconUrl: 'icon.png',
     type: 'basic',
-    message: messageString
+    message: 'Link: ' + urlString,
+	buttons:[{
+		title: "Accept",
+	}]
   }, function(notificationId) {
 	  console.log("Notification Sent:" + notificationId);
   }
@@ -154,37 +157,30 @@ chrome.storage.local.get('regid', function(result){
 var successURL = 'https://www.facebook.com/connect/login_success.html';
 function onFacebookLogin() {
 	if (!localStorage.accessToken) {
-		chrome.tabs.getAllInWindow(null, function(tabs) {
-			for (var i = 0; i < tabs.length; i++) {
-				if (tabs[i].url.indexOf(successURL) == 0) {
-					console.log(tabs[i].url.split('#'));
-					var params = tabs[i].url.split('#')[1];
-					access = params.split('&')[0]
-					console.log(access);
-					localStorage.accessToken = access;
-					chrome.tabs.onUpdated.removeListener(onFacebookLogin);
-					chrome.storage.local.get('regid', function(result){
-						console.log("RegID: " + result.regid);
-					});
-					return;
-				}
-			}
+		chrome.tabs.query({url:successURL}, function(tabs) {
+				console.log(tabs[0].url.split('#'));
+				var params = tabs[0].url.split('#')[1];
+				access = params.split('&')[0]
+				console.log(access);
+				localStorage.accessToken = access;
+				chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+				var userUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
+				var user_request = $.ajax({
+				  url: userUrl,
+				  type: "GET",
+				  error: function() {
+					  console.log("Request failed!");
+					},
+				  success:function(msg) {
+						console.log(msg);
+						localStorage.userName = msg.name;
+						registerDB(msg.id);
+					}
+				});
+				chrome.tabs.remove(tabs[0].id);
+				return;
 		});
 	}
-	var userUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
-	
-	var user_request = $.ajax({
-	  url: userUrl,
-	  type: "GET",
-	  error: function() {
-		  console.log("Request failed!");
-		},
-	  success:function(msg) {
-			console.log(msg);
-			localStorage.userName = msg.name;
-			registerDB(msg.id);
-		}
-	});
 }
 function registerDB(fbid)
 {
