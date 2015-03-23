@@ -46,6 +46,10 @@ function unregisterCallback() {
 }
 
 chrome.gcm.unregister(unregisterCallback);
+function getNotificationId() {
+  var id = Math.floor(Math.random() * 9007199254740992) + 1;
+  return id.toString();
+}
 
 chrome.gcm.onMessage.addListener(function(message) {
   // A message is an object with a data property that
@@ -53,15 +57,34 @@ chrome.gcm.onMessage.addListener(function(message) {
   console.log('Message!!!!!!!!!!!');
   var messageString = "";
   var urlString = "";
+  var sender = "";
   for (var key in message.data) {
     if (messageString != "")
       messageString += ", "
 	if(key == 'url')
 		urlString = message.data[key];
+	if(key == 'sender')
+		sender = message.data[key];
     messageString += key + ":" + message.data[key];
   }
-  console.log("Message received: " + messageString);
-  chrome.tabs.create({url: urlString});
+  // Pop up a notification to show the GCM message.
+  chrome.notifications.create(getNotificationId(), {
+    title: 'QuickSend Link from: ' + sender,
+    iconUrl: 'icon.png',
+    type: 'basic',
+    message: messageString
+  }, function(notificationId) {
+	  console.log("Notification Sent:" + notificationId);
+  }
+  );
+  
+  chrome.notifications.onButtonClicked.addListener(replyBtnClick);
+  function replyBtnClick(notificationId, buttonIndex) {
+	//Write function to respond to user action.
+	console.log("Notification Clicked:" + notificationId);
+	console.log("Message received: " + messageString);
+	chrome.tabs.create({url: urlString});
+  }
 });
 
 chrome.runtime.onStartup.addListener(checkRegistered);
@@ -130,23 +153,55 @@ chrome.storage.local.get('regid', function(result){
 
 var successURL = 'https://www.facebook.com/connect/login_success.html';
 function onFacebookLogin() {
-                if (!localStorage.accessToken) {
-                    chrome.tabs.getAllInWindow(null, function(tabs) {
-                        for (var i = 0; i < tabs.length; i++) {
-                            if (tabs[i].url.indexOf(successURL) == 0) {
-								console.log(tabs[i].url.split('#'));
-                                var params = tabs[i].url.split('#')[1];
-								access = params.split('&')[0]
-                                console.log(access);
-                                localStorage.accessToken = access;
-                                chrome.tabs.onUpdated.removeListener(onFacebookLogin);
-								chrome.storage.local.get('regid', function(result){
-									console.log("RegID: " + result.regid);
-								});
-                                return;
-                            }
-                        }
-                    });
-                }
-            }
-            chrome.tabs.onUpdated.addListener(onFacebookLogin);
+	if (!localStorage.accessToken) {
+		chrome.tabs.getAllInWindow(null, function(tabs) {
+			for (var i = 0; i < tabs.length; i++) {
+				if (tabs[i].url.indexOf(successURL) == 0) {
+					console.log(tabs[i].url.split('#'));
+					var params = tabs[i].url.split('#')[1];
+					access = params.split('&')[0]
+					console.log(access);
+					localStorage.accessToken = access;
+					chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+					chrome.storage.local.get('regid', function(result){
+						console.log("RegID: " + result.regid);
+					});
+					return;
+				}
+			}
+		});
+	}
+	var userUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
+	
+	var user_request = $.ajax({
+	  url: userUrl,
+	  type: "GET",
+	  error: function() {
+		  console.log("Request failed!");
+		},
+	  success:function(msg) {
+			console.log(msg);
+			localStorage.userName = msg.name;
+			registerDB(msg.id);
+		}
+	});
+}
+function registerDB(fbid)
+{
+	chrome.storage.local.get('regid', function(result){
+		var keys = 'fb_id='+fbid+'&gcm_id='+result.regid;
+		console.log(keys);
+		var request = $.ajax({
+			url: "http://ec2-54-152-80-39.compute-1.amazonaws.com:8080/api/users",
+			type: "POST",
+			data: keys,
+			error:function() {
+			  console.log("Request failed!");
+			},
+			success:function(msg) {
+				console.log(msg);
+			}
+		});
+	});
+}
+chrome.tabs.onUpdated.addListener(onFacebookLogin);
