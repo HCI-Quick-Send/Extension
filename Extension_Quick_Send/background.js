@@ -67,6 +67,7 @@ chrome.gcm.onMessage.addListener(function(message) {
 		sender = message.data[key];
     messageString += key + ":" + message.data[key];
   }
+  console.log(messageString);
   // Pop up a notification to show the GCM message.
   chrome.notifications.create(getNotificationId(), {
     title: 'QuickSend Link from: ' + sender,
