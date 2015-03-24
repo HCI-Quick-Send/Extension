@@ -69,7 +69,8 @@ chrome.gcm.onMessage.addListener(function(message) {
   }
   console.log(messageString);
   // Pop up a notification to show the GCM message.
-  chrome.notifications.create(getNotificationId(), {
+  var nid = getNotificationId();
+  chrome.notifications.create( nid,{
     title: 'QuickSend Link from: ' + sender,
     iconUrl: 'icon.png',
     type: 'basic',
@@ -85,9 +86,12 @@ chrome.gcm.onMessage.addListener(function(message) {
   chrome.notifications.onButtonClicked.addListener(replyBtnClick);
   function replyBtnClick(notificationId, buttonIndex) {
 	//Write function to respond to user action.
-	console.log("Notification Clicked:" + notificationId);
-	console.log("Message received: " + messageString);
-	chrome.tabs.create({url: urlString});
+	if(nid == notificationId)
+	{
+		console.log("Notification Clicked:" + notificationId);
+		console.log("Message received: " + messageString);
+		chrome.tabs.create({url: urlString});
+	}
   }
 });
 
