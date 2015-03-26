@@ -182,7 +182,6 @@ function onFacebookLogin() {
 						registerDB(msg.id);
 					}
 				});
-				chrome.tabs.remove(tabs[0].id);
 				return;
 		});
 	}
