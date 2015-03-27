@@ -14,6 +14,9 @@ $(document).ready(function(){
 
 	$("#fbSend").click(function(){
 		console.log("FB clicked");
+		if (localStorage.accessToken) {
+			loadIFrame();
+		}
 		$('#gcm_fields').hide();
 		$('#myIFrame').show();
 	});
@@ -56,9 +59,9 @@ function setupGCM()
 				console.log(options);
 				$("#friendsList").html(options); //add options to select in HTML
 				$('#fbBtn').hide();
-				loadIFrame();
 			}
 		});
+		loadIFrame();
 	}
 	else
 	{
@@ -127,7 +130,36 @@ var accToken = localStorage.accessToken;
 var tabUrl; //url of the current tab
 var msgStr; //construct the message string for the redirect URL
 
+
+function checkAccess()
+{
+	var checkUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
+	var check_request = $.ajax({
+			url: checkUrl,
+			type: "GET",
+			error: function() {
+				console.log("Request failed!");
+			},
+			success:function(msg) {
+				console.log(msg);
+				if(msg.error)
+				{
+					$('#fbBtn').show();
+					$('#tabs').hide();
+					$('#myIFrame').hide();
+				}
+				else
+				{
+					getIFrameLink();
+				}
+			}
+		});
+}
 function loadIFrame()
+{
+	checkAccess();
+}
+function getIFrameLink()
 {
 	$('#fbBtn').hide();
 	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
