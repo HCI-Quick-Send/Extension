@@ -17,27 +17,27 @@
         </div>
         <div class="content">
             <!-- login button for fb. Displayed when user not logged in. -->
-            <button id="fbBtn" class="show"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
+            <button hidden id="fbBtn" class="show"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
             
-            <div class="search">
+            <div hidden class="search">
                 To : 
                 <select multiple id="friendsList"></select>
             </div>
             <!-- <div class="message">
                 Message : 
             </div> -->
-            <div class = "link">
+            <div hidden class = "link">
                 Link : <p id="link"></p>
             </div>
         </div>
 
         <!-- <p id="msg_url"></p> -->
 
-        <button id="btn">Show selected values</button>
+        <button hidden id="btn">Show selected values</button>
         
-        <a id="myButton" href="#">Load</a> 
+        <a hidden id="myButton" href="#">Load</a> 
 
-        <iframe id="myIFrame" height="80%" width="100%" src=""></iframe>
+        <iframe hidden id="myIFrame" height="80%" width="100%" src=""></iframe>
 
   </body>
 

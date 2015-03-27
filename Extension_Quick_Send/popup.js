@@ -1,3 +1,4 @@
+$('#fbBtn').removeClass('show').addClass('hide');
 //Store fb_id and gcm_id to database
 if (localStorage.accessToken) {
 	
@@ -20,9 +21,16 @@ if (localStorage.accessToken) {
 
 			console.log(options);
 			$("#friendsList").html(options); //add options to select in HTML
+			$('#fbBtn').hide();
+			loadIFrame();
 		}
 	});
 }
+else
+{
+	$('#fbBtn').show();
+}
+
 
 //gets user IDs of the selected friends and sends GCM notifications to them
 function getSelectValues(select) {
@@ -77,21 +85,34 @@ var accToken = localStorage.accessToken;
 var tabUrl; //url of the current tab
 var msgStr; //construct the message string for the redirect URL
 
-chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-	//get URL of current tab
-	tabUrl = tabs[0].url;
-	//store URL in local storage for getSelectValues to use
-	localStorage.currentPage = tabUrl;
+function loadIFrame()
+{
+	$('#fbBtn').hide();
+	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+		//get URL of current tab
+		tabUrl = tabs[0].url;
+		//store URL in local storage for getSelectValues to use
+		localStorage.currentPage = tabUrl;
 
-	$("#link").html(tabUrl);
+		$("#link").html(tabUrl);
 
-	var istr = "http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link=" + tabUrl + "&redirect_uri=https://www.google.com/?gws_rd=ssl&display=iframe";
-
-	$("#myButton").click(function(event){            
+		var istr = "http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link=" + tabUrl + "&redirect_uri=https://www.google.com/?gws_rd=ssl&display=iframe";
+			   
 		$("#myIFrame").attr('src', istr);
+		loadContent();
 	});
-});
+}
 
+function loadContent()
+{
+	$('#fbBtn').hide();
+	$('#myIFrame').show();
+}
+
+function hideContent()
+{
+	$('#fbBtn').hide();
+}
 // this is how you can show/hide elements
 // $('#fbBtn').removeClass('hide').addClass('show');
 
