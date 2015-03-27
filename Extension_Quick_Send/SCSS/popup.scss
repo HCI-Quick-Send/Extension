@@ -11,6 +11,10 @@ $font-sm : 12px;
 
 body {
 	margin: 0;
+	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    font-size: 100%;
+    width: 600px;
+    height: 700px;
 }
 
 .content {
@@ -27,4 +31,22 @@ body {
 .search{
 	font-size: $font-md;
 	color: $dark-gray;
+}
+
+#fbBtn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3B5998;
+  padding: 10px 20px 10px 50px;
+  text-decoration: none;
+  background: #3B5998 url(../../fb.png) 10px 10px no-repeat;
+  margin: 150px 150px;
+}
+
+#fbBtn:hover {
+  cursor: pointer;
 }

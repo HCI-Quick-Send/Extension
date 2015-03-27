@@ -3,7 +3,8 @@ body {
   margin: 0;
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
-  width: 500px; }
+  width: 600px;
+  height: 700px; }
 
 .content {
   padding: 10px; }
@@ -17,5 +18,21 @@ body {
 .search {
   font-size: 16px;
   color: #2A2F3E; }
+
+#fbBtn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3B5998;
+  padding: 10px 20px 10px 50px;
+  text-decoration: none;
+  background: #3B5998 url(../../fb.png) 10px 10px no-repeat;
+  margin: 150px 150px; }
+
+#fbBtn:hover {
+  cursor: pointer; }
 
 /*# sourceMappingURL=popup.css.map */
