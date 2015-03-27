@@ -30,7 +30,10 @@ else
 {
 	$('#fbBtn').show();
 }
-
+$("#fbBtn").click(function(){
+	$('#fbBtn').hide();
+	$('#fbBtn').attr("hidden");
+});
 
 //gets user IDs of the selected friends and sends GCM notifications to them
 function getSelectValues(select) {
