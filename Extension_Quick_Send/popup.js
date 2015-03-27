@@ -78,6 +78,20 @@ $(document).ready(function(){
 		var el = document.getElementsByTagName('select')[0];
 		console.log(getSelectValues(el));
 	});
+	
+	$(".js-example-basic-multiple").select2();
+
+	$("#fbSend").click(function(){
+		console.log("FB clicked");
+		$('#gcm_fields').hide();
+		$('#myIFrame').show();
+	});
+
+	$("#qsSend").click(function(){
+		console.log("QS clicked!");
+		$('#myIFrame').hide();
+		$('#gcm_fields').show();
+	});
 });
 
 
@@ -109,6 +123,7 @@ function loadIFrame()
 function loadContent()
 {
 	$('#fbBtn').hide();
+	$('#tabs').show();
 	$('#myIFrame').show();
 }
 

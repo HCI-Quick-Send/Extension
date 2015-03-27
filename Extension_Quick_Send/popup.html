@@ -5,8 +5,10 @@
         <title>QuickSend</title>
 
         <link rel="stylesheet" type="text/css" href="SCSS/CSS/popup.css">
-    	
+    	<link href="dist/css/select2.min.css" rel="stylesheet" /> <!-- select2 for multiselect dropdown -->
+        
         <script src="jquery-2.1.3.min.js"></script>
+        <script src="dist/js/select2.min.js"></script>
         <script src="popup.js"></script>
     
     </head>
@@ -17,21 +19,28 @@
         </div>
         <div class="content">
             <!-- login button for fb. Displayed when user not logged in. -->
-            <button hidden id="fbBtn" class="show"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
+            <button id="fbBtn" class="btn"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
             
-            <div hidden class="search">
-                To : 
-                <select multiple id="friendsList"></select>
+            <div hidden id="tabs">
+                Send via <button id="fbSend" class="btn smlBtn fbBlue"> Facebook </button> <button id="qsSend" class="btn smlBtn"> QuickSend </button>
             </div>
-            <!-- <div class="message">
-                Message : 
-            </div> -->
-            <div hidden class = "link">
-                Link : <p id="link"></p>
+
+            <div hidden id="gcm_fields">
+                
+                <div class="search">
+                    <p class="mgn-top">To </p>
+                    <select multiple id="friendsList" class="js-example-basic-multiple" style="width: 100%;"></select></span>
+                </div>
+
+                <p class="mgn-top">Link </p>
+                <div class ="link" id="link">
+                </div>
+                <!-- <div class="message">
+                    Message : 
+                </div> -->
+                <button id="Send" class="btn smlBtn"> Send </button>
             </div>
         </div>
-
-        <!-- <p id="msg_url"></p> -->
 
         <button hidden id="btn">Show selected values</button>
         

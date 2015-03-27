@@ -5,7 +5,7 @@ $dark-gray: #2A2F3E;
 $light-gray: #A7A0A2;
 $white: #FFF;
 
-$font-lg : 20px;
+$font-lg : 22px;
 $font-md : 16px;
 $font-sm : 12px;
 
@@ -14,7 +14,7 @@ body {
 	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
     font-size: 100%;
     width: 600px;
-    height: 700px;
+    height: 500px;
 }
 
 .content {
@@ -22,7 +22,7 @@ body {
 }
 
 .header {
-	padding: 10px 20px;
+	padding: 20px 250px;
 	background-color: $pink;
 	font-size: $font-lg;
 	color: $white;
@@ -33,33 +33,62 @@ body {
 	color: $dark-gray;
 }
 
-#fbBtn {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  background: #3B5998;
-  padding: 10px 20px 10px 50px;
-  text-decoration: none;
-  background: #3B5998 url(../../fb.png) 10px 10px no-repeat;
-  margin: 150px 150px;
+.btn {
+  	-webkit-border-radius: 0;
+  	-moz-border-radius: 0;
+  	border-radius: 0px;
+  	font-family: Arial;
+  	color: #ffffff;
+  	text-decoration: none;
 }
 
-#fbBtn:hover {
+.btn:hover {
   cursor: pointer;
 }
 
-#fbBtn a{
+.btn a{
 	color: #ffffff;
 	text-decoration: none;
 }
 
-.show {
-	display: inline-block;
+#fbBtn {
+	background: #3B5998 url(../../fb.png) 10px 10px no-repeat;
+	margin: 150px 150px;
+	font-size: 20px;
+  	padding: 10px 20px 10px 50px;
 }
 
-.hide {
-	display: none;
+.smlBtn {
+	font-size: 100%;
+  	padding: 5px 10px;
+  	background: $pink;
+  	margin: 10px;
 }
+
+.fbBlue {
+	background: #3B5998;
+}
+
+.mgn-rt {
+	margin-right: 20px;
+}
+
+.mgn-top {
+	margin-top: 30px;
+}
+
+#link {
+	border: 1px solid #aaa;
+	padding: 5px 10px;
+	border-radius: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#Send {
+	margin-left: 250px;
+	margin-top: 50px;
+	padding: 10px 20px;
+}
+
