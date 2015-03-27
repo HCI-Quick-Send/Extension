@@ -35,6 +35,10 @@ body {
 #fbBtn:hover {
   cursor: pointer; }
 
+#fbBtn a {
+  color: #ffffff;
+  text-decoration: none; }
+
 .show {
   display: inline-block; }
 
