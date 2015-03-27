@@ -1,39 +1,70 @@
-$('#fbBtn').removeClass('show').addClass('hide');
-//Store fb_id and gcm_id to database
-if (localStorage.accessToken) {
-	
-
-	var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
-	console.log(friendsUrl);
-	var friends_request = $.ajax({
-	 	url: friendsUrl,
-	 	type: "GET",
-	 	error: function() {
-		 	console.log("Request failed!");
-		},
-	  	success:function(msg) {
-			console.log(msg);
-			//load friends' options to #friendsList from json
-			var options = "";
-			for (var i = 0; i < msg.data.length; i++) {
-				options += '<option value="' + msg.data[i].id + '">' + msg.data[i].name + '</option>';
-			}
-
-			console.log(options);
-			$("#friendsList").html(options); //add options to select in HTML
-			$('#fbBtn').hide();
-			loadIFrame();
-		}
+$(document).ready(function(){
+	$("#btn").click(function(){
+		var el = document.getElementsByTagName('select')[0];
+		console.log(getSelectValues(el));
 	});
-}
-else
-{
-	$('#fbBtn').show();
-}
-$("#fbBtn").click(function(){
-	$('#fbBtn').hide();
-	$('#fbBtn').attr("hidden");
+	
+	$("#fbBtn").click(function(){
+		$('#fbBtn').hide();
+		$('#fbBtn').attr("hidden");
+		$('#fbBtn').removeClass('show').addClass('hide');
+	});
+
+	$(".js-example-basic-multiple").select2();
+
+	$("#fbSend").click(function(){
+		console.log("FB clicked");
+		$('#gcm_fields').hide();
+		$('#myIFrame').show();
+	});
+
+	$("#qsSend").click(function(){
+		console.log("QS clicked!");
+		$('#myIFrame').hide();
+		$('#gcm_fields').show();
+	});
+	
+	$("#Send").click(function(){
+		var el = document.getElementsByTagName('select')[0];
+		console.log(getSelectValues(el));
+	});
+	setupGCM();
 });
+
+function setupGCM()
+{
+	//Store fb_id and gcm_id to database
+	if (localStorage.accessToken) {
+		
+
+		var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
+		console.log(friendsUrl);
+		var friends_request = $.ajax({
+			url: friendsUrl,
+			type: "GET",
+			error: function() {
+				console.log("Request failed!");
+			},
+			success:function(msg) {
+				console.log(msg);
+				//load friends' options to #friendsList from json
+				var options = "";
+				for (var i = 0; i < msg.data.length; i++) {
+					options += '<option value="' + msg.data[i].id + '">' + msg.data[i].name + '</option>';
+				}
+
+				console.log(options);
+				$("#friendsList").html(options); //add options to select in HTML
+				$('#fbBtn').hide();
+				loadIFrame();
+			}
+		});
+	}
+	else
+	{
+		$('#fbBtn').show();
+	}
+}
 
 //gets user IDs of the selected friends and sends GCM notifications to them
 function getSelectValues(select) {
@@ -69,30 +100,12 @@ function getSelectValues(select) {
 					},
 					success:function(msg) {
 							console.log(msg);
+							$('#Toast').append('Sent Successfully!').fadeIn(400).delay(3000).fadeOut(400);
 					}
 	});
 }
 
-$(document).ready(function(){
-	$("#btn").click(function(){
-		var el = document.getElementsByTagName('select')[0];
-		console.log(getSelectValues(el));
-	});
-	
-	$(".js-example-basic-multiple").select2();
 
-	$("#fbSend").click(function(){
-		console.log("FB clicked");
-		$('#gcm_fields').hide();
-		$('#myIFrame').show();
-	});
-
-	$("#qsSend").click(function(){
-		console.log("QS clicked!");
-		$('#myIFrame').hide();
-		$('#gcm_fields').show();
-	});
-});
 
 
 // code below gets the current tab's URL and creates an iframe with it
