@@ -76,8 +76,7 @@ $(document).ready(function(){
 		console.log(getSelectValues(el));
 	});
 	
-	// $('select').select2();
-	// $(".js-example-basic-multiple").select2();
+	$(".js-example-basic-multiple").select2();
 
 	$("#fbSend").click(function(){
 		console.log("FB clicked");

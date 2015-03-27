@@ -5,7 +5,7 @@ $dark-gray: #2A2F3E;
 $light-gray: #A7A0A2;
 $white: #FFF;
 
-$font-lg : 20px;
+$font-lg : 22px;
 $font-md : 16px;
 $font-sm : 12px;
 
@@ -22,7 +22,7 @@ body {
 }
 
 .header {
-	padding: 10px 20px;
+	padding: 20px 250px;
 	background-color: $pink;
 	font-size: $font-lg;
 	color: $white;
@@ -68,3 +68,27 @@ body {
 .fbBlue {
 	background: #3B5998;
 }
+
+.mgn-rt {
+	margin-right: 20px;
+}
+
+.mgn-top {
+	margin-top: 30px;
+}
+
+#link {
+	border: 1px solid #aaa;
+	padding: 5px 10px;
+	border-radius: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#Send {
+	margin-left: 250px;
+	margin-top: 50px;
+	padding: 10px 20px;
+}
+
