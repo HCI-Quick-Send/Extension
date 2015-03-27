@@ -14,7 +14,7 @@ body {
 	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
     font-size: 100%;
     width: 600px;
-    height: 700px;
+    height: 500px;
 }
 
 .content {
@@ -33,33 +33,38 @@ body {
 	color: $dark-gray;
 }
 
-#fbBtn {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  background: #3B5998;
-  padding: 10px 20px 10px 50px;
-  text-decoration: none;
-  background: #3B5998 url(../../fb.png) 10px 10px no-repeat;
-  margin: 150px 150px;
+.btn {
+  	-webkit-border-radius: 0;
+  	-moz-border-radius: 0;
+  	border-radius: 0px;
+  	font-family: Arial;
+  	color: #ffffff;
+  	text-decoration: none;
 }
 
-#fbBtn:hover {
+.btn:hover {
   cursor: pointer;
 }
 
-#fbBtn a{
+.btn a{
 	color: #ffffff;
 	text-decoration: none;
 }
 
-.show {
-	display: inline-block;
+#fbBtn {
+	background: #3B5998 url(../../fb.png) 10px 10px no-repeat;
+	margin: 150px 150px;
+	font-size: 20px;
+  	padding: 10px 20px 10px 50px;
 }
 
-.hide {
-	display: none;
+.smlBtn {
+	font-size: 100%;
+  	padding: 5px 10px;
+  	background: $pink;
+  	margin: 10px;
+}
+
+.fbBlue {
+	background: #3B5998;
 }
