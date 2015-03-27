@@ -27,6 +27,8 @@ $(document).ready(function(){
 	$("#Send").click(function(){
 		var el = document.getElementsByTagName('select')[0];
 		console.log(getSelectValues(el));
+		var snd = new Audio("woosh.wav"); // buffers automatically when created
+		snd.play();
 	});
 	setupGCM();
 });
