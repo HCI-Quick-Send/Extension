@@ -92,6 +92,8 @@ chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 	});
 });
 
+// this is how you can show/hide elements
+// $('#fbBtn').removeClass('hide').addClass('show');
 
 
 

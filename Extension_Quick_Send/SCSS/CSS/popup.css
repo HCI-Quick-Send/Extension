@@ -35,4 +35,10 @@ body {
 #fbBtn:hover {
   cursor: pointer; }
 
+.show {
+  display: inline-block; }
+
+.hide {
+  display: none; }
+
 /*# sourceMappingURL=popup.css.map */
