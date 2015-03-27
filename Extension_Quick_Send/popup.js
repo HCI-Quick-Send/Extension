@@ -27,8 +27,6 @@ $(document).ready(function(){
 	$("#Send").click(function(){
 		var el = document.getElementsByTagName('select')[0];
 		console.log(getSelectValues(el));
-		var snd = new Audio("woosh.wav"); // buffers automatically when created
-		snd.play();
 	});
 	setupGCM();
 });
@@ -91,20 +89,32 @@ function getSelectValues(select) {
 	}
 
 	//send GCM notifications
-	var notif = 'url='+ localStorage.currentPage +'&users='+list+'&sender='+localStorage.userName;
-	console.log("notif : " + notif);
-	var notification = $.ajax({
-					url: "http://54.152.80.39:8080/api/gcm/send",
-					type: "POST",
-					data: notif,
-					error:function() {
-					  console.log("Request failed!");
-					},
-					success:function(msg) {
-							console.log(msg);
-							$('#Toast').append('Sent Successfully!').fadeIn(400).delay(3000).fadeOut(400);
-					}
-	});
+	if(result.length > 0)
+	{
+		var notif = 'url='+ localStorage.currentPage +'&users='+list+'&sender='+localStorage.userName;
+		console.log("notif : " + notif);
+		var notification = $.ajax({
+						url: "http://54.152.80.39:8080/api/gcm/send",
+						type: "POST",
+						data: notif,
+						error:function() {
+						  console.log("Request failed!");
+						},
+						success:function(msg) {
+								console.log(msg);
+								var snd = new Audio("woosh.wav"); // buffers automatically when created
+								snd.play();
+								$('#Toast span').text('Sent Successfully!');
+								$('#Toast').fadeIn(400).delay(3000).fadeOut(400);
+						}
+		});
+	}
+	else
+	{
+		$('#Toast span').text('Error: No Friend(s) Selected!');
+		$('#Toast').fadeIn(400).delay(3000).fadeOut(400);
+	}
+	
 }
 
 
@@ -128,7 +138,8 @@ function loadIFrame()
 
 		$("#link").html(tabUrl);
 
-		var istr = "http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link=" + tabUrl + "&redirect_uri=https://www.google.com/?gws_rd=ssl&display=iframe";
+		var istr = "http://www.facebook.com/dialog/send?" + accToken + "&app_id=1387556274895733&link=" + tabUrl + "&redirect_uri="+
+		"https://www.google.com/?gws_rd=ssl&display=iframe";
 			   
 		$("#myIFrame").attr('src', istr);
 		loadContent();

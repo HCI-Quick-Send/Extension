@@ -19,7 +19,7 @@
         </div>
         <div class="content">
             <!-- login button for fb. Displayed when user not logged in. -->
-            <button id="fbBtn" class="btn"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
+            <button hidden id="fbBtn" class="btn"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
             
             <div hidden id="tabs">
                 Send via <button id="fbSend" class="btn smlBtn fbBlue"> Facebook </button> <button id="qsSend" class="btn smlBtn"> QuickSend </button>
@@ -47,7 +47,9 @@
         <a hidden id="myButton" href="#">Load</a> 
 
         <iframe hidden id="myIFrame" height="80%" width="100%" src=""></iframe>
-		<div id="Toast" style='display:none'></div>
+		<div id="Toast" style='display:none'>
+		<span></span>
+		</div>
   </body>
 
 </html>
