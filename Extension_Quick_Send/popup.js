@@ -137,8 +137,12 @@ function checkAccess()
 	var check_request = $.ajax({
 			url: checkUrl,
 			type: "GET",
-			error: function() {
+			error: function(msg) {
 				console.log("Request failed!");
+				console.log(msg);
+				$('#fbBtn').show();
+				$('#tabs').hide();
+				$('#myIFrame').hide();
 			},
 			success:function(msg) {
 				console.log(msg);
