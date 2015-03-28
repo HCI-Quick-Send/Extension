@@ -140,6 +140,7 @@ function checkAccess()
 			error: function(msg) {
 				console.log("Request failed!");
 				console.log(msg);
+				localStorage.removeItem('accessToken');
 				$('#fbBtn').show();
 				$('#tabs').hide();
 				$('#myIFrame').hide();
@@ -148,6 +149,7 @@ function checkAccess()
 				console.log(msg);
 				if(msg.error)
 				{
+					localStorage.removeItem('accessToken');
 					$('#fbBtn').show();
 					$('#tabs').hide();
 					$('#myIFrame').hide();

@@ -161,6 +161,7 @@ chrome.storage.local.get('regid', function(result){
 
 var successURL = 'https://www.facebook.com/connect/login_success.html';
 function onFacebookLogin() {
+	console.log('Tab Updated!!');
 	if (!localStorage.accessToken) {
 		chrome.tabs.query({url:successURL}, function(tabs) {
 				console.log(tabs[0].url.split('#'));
@@ -168,7 +169,8 @@ function onFacebookLogin() {
 				access = params.split('&')[0]
 				console.log(access);
 				localStorage.accessToken = access;
-				//chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+				chrome.tabs.onUpdated.removeListener(onFacebookLogin);
+				chrome.tabs.onUpdated.addListener(onFacebookLogin);
 				var userUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
 				var user_request = $.ajax({
 				  url: userUrl,
