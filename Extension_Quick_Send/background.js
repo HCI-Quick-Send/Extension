@@ -169,8 +169,6 @@ function onFacebookLogin() {
 				access = params.split('&')[0]
 				console.log(access);
 				localStorage.accessToken = access;
-				chrome.tabs.onUpdated.removeListener(onFacebookLogin);
-				chrome.tabs.onUpdated.addListener(onFacebookLogin);
 				var userUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
 				var user_request = $.ajax({
 				  url: userUrl,
