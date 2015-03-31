@@ -69,21 +69,30 @@ body {
 	background: #3B5998;
 }
 
-.mgn-rt {
-	margin-right: 20px;
+.mgn-btn{
+	margin: 10px 50px;
 }
 
 .mgn-top {
 	margin-top: 30px;
 }
 
-#link {
+.mgn-btm {
+    margin-bottom: 5px;
+}
+
+.input-box {
 	border: 1px solid #aaa;
 	padding: 5px 10px;
 	border-radius: 4px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.msg {
+    width: 96%;
+    font-size: 100%;
 }
 
 #Send {

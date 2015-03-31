@@ -22,22 +22,23 @@
             <button hidden id="fbBtn" class="btn"><a href="https://www.facebook.com/dialog/oauth?client_id=1387556274895733&response_type=token&scope=public_profile,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html" target="_blank"> Login with Facebook </a></button>
             
             <div hidden id="tabs">
-                Send via <button id="fbSend" class="btn smlBtn fbBlue"> Facebook </button> <button id="qsSend" class="btn smlBtn"> QuickSend </button>
+                Send via <button id="fbSend" class="btn smlBtn fbBlue mgn-btn"> Facebook </button> <button id="qsSend" class="btn smlBtn mgn-btn"> QuickSend </button>
             </div>
 
             <div hidden id="gcm_fields">
                 
                 <div class="search">
-                    <p class="mgn-top">To </p>
+                    <p class="mgn-top mgn-btm">To </p>
                     <select multiple id="friendsList" class="js-example-basic-multiple" style="width: 100%;"></select></span>
                 </div>
 
-                <p class="mgn-top">Link </p>
-                <div class ="link" id="link">
-                </div>
-                <!-- <div class="message">
-                    Message : 
-                </div> -->
+                <p class="mgn-top mgn-btm">Link </p>
+                <div class ="input-box" id="link"></div>
+
+                <form action="demo_form.asp" class="mgn-top mgn-btm">
+                    <p class="mgn-top">Message</p>
+                    <input type="text" name="FirstName" value="" class="input-box msg"><br>
+                </form>
                 <button id="Send" class="btn smlBtn"> Send </button>
             </div>
         </div>
