@@ -58,6 +58,7 @@ chrome.gcm.onMessage.addListener(function(message) {
   var messageString = "";
   var urlString = "";
   var sender = "";
+  var msg = "";
   for (var key in message.data) {
     if (messageString != "")
       messageString += ", "
@@ -65,6 +66,8 @@ chrome.gcm.onMessage.addListener(function(message) {
 		urlString = message.data[key];
 	if(key == 'sender')
 		sender = message.data[key];
+	if(key == 'message')
+		msg = message.data[key];
     messageString += key + ":" + message.data[key];
   }
   console.log(messageString);
@@ -74,7 +77,8 @@ chrome.gcm.onMessage.addListener(function(message) {
     title: 'QuickSend Link from: ' + sender,
     iconUrl: 'icon.png',
     type: 'basic',
-    message: 'Link: ' + urlString,
+    message: 'Message: ' + msg,
+	contextMessage: 'Link: ' + urlString,
 	buttons:[{
 		title: "Accept",
 	}]

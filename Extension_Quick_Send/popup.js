@@ -94,7 +94,8 @@ function getSelectValues(select) {
 	//send GCM notifications
 	if(result.length > 0)
 	{
-		var notif = 'url='+ localStorage.currentPage +'&users='+list+'&sender='+localStorage.userName;
+		var GCMMessage = $('#Message').val();
+		var notif = 'url='+ localStorage.currentPage +'&message='+GCMMessage+'&users='+list+'&sender='+localStorage.userName;
 		console.log("notif : " + notif);
 		var notification = $.ajax({
 						url: "http://54.152.80.39:8080/api/gcm/send",
