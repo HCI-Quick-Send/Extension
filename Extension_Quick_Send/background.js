@@ -175,6 +175,8 @@ function onFacebookLogin() {
 	console.log('Tab Updated!!');
 	if (!localStorage.accessToken) {
 		chrome.tabs.query({url:successURL}, function(tabs) {
+			if(tabs)
+			{
 				console.log(tabs[0].url.split('#'));
 				var params = tabs[0].url.split('#')[1];
 				access = params.split('&')[0]
@@ -195,6 +197,7 @@ function onFacebookLogin() {
 				});
 				chrome.tabs.remove(tabs[0].id);
 				return;
+			}
 		});
 	}
 }
