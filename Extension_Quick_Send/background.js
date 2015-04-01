@@ -103,7 +103,7 @@ chrome.runtime.onStartup.addListener(checkRegistered);
 chrome.runtime.onInstalled.addListener(function(details)
 {
 	localStorage.removeItem("accessToken");
-	chrome.storage.local.remove('regid', function(result){
+	chrome.storage.local.set({registered: false}, function(result){
 		checkRegistered();
     });
 
