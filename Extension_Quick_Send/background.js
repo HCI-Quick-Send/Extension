@@ -100,7 +100,14 @@ chrome.gcm.onMessage.addListener(function(message) {
 });
 
 chrome.runtime.onStartup.addListener(checkRegistered);
-chrome.runtime.onInstalled.addListener(checkRegistered);
+chrome.runtime.onInstalled.addListener(function(details)
+{
+	localStorage.removeItem("accessToken");
+	chrome.storage.local.remove('regid', function(result){
+		checkRegistered();
+    });
+
+});
 // Substitute your own sender ID here. This is the project
 // number you got from the Google Developers Console.
 var senderId = "1083702790790";
